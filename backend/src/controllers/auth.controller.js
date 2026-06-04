@@ -143,16 +143,27 @@ async function LoginController(req, res) {
   }
 }
 
-async function LogoutController(req,res){
-    let token=req.cookies.token;
-    if(token){
-     await blacklistToken.create(
+async function getMeController(req, res) {
+  try {
+    const userId = req.user.userId;
 
-     )
+    const user = await User.findById(userId).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
     }
+
+    res.status(200).json({
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
 }
-
-
 
 async function LogoutController(req, res) {
   try {
