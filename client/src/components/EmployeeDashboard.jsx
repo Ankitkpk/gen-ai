@@ -1,4 +1,6 @@
 import React from "react";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   Calendar1Icon,
   DollarSignIcon,
@@ -40,7 +42,7 @@ const EmployeeDashboard = ({ data }) => {
         </h1>
 
         <p className="text-slate-500 mt-1">
-          {emp?.position} - {emp?.department}
+          {emp?.position} - {emp?.department || "No Department"} 
         </p>
       </div>
 
@@ -52,19 +54,24 @@ const EmployeeDashboard = ({ data }) => {
           return (
             <div
               key={index}
-              className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5"
+              className="bg-white rounded-2xl shadow-sm flex items-center justify-between border border-l-4 border-l-indigo-600 border-slate-200 p-7 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-indigo-200 cursor-pointer"
             >
-              <div className="flex items-center justify-between mb-4">
-                <Icon className="text-indigo-600" size={28} />
-              </div>
-
-              <h2 className="text-2xl font-bold text-slate-800">
-                {card.value}
-              </h2>
+                <div className="flex flex-col">
+              
 
               <p className="text-slate-700 font-medium mt-1">
                 {card.title}
               </p>
+               <h2 className="text-2xl font-bold text-slate-800">
+                {card.value}
+              </h2>
+                </div>
+               
+              <div className=" mb-4">
+                <Icon className="text-indigo-600" size={28} />
+              </div>
+
+              
 
               
             </div>
@@ -74,13 +81,15 @@ const EmployeeDashboard = ({ data }) => {
 
       {/* Action Buttons */}
       <div className="flex flex-wrap gap-3">
-        <button className="px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition">
-          Mark Attendance
-        </button>
+       <Link to="/attendance" className="px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition flex items-center gap-2">
+  
+  Mark Attendance
+  <ArrowRight size={18} />
+</Link>
 
-        <button className="px-4 py-2 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">
+        <Link to="/leave" className="px-4 py-2 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">
           Apply for Leave
-        </button>
+        </Link>
       </div>
     </div>
   );
