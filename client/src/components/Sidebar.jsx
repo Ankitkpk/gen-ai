@@ -87,22 +87,19 @@ const Sidebar = () => {
       {/* User Profile */}
       <div className="p-5 ">
         <div className="flex items-center gap-3 bg-slate-800 p-4 rounded-xl">
-          <img
-            src={dummyEmployeeData.firstName}
-            alt={username}
-            className="w-12 h-12 rounded-full object-cover border border-white/10"
-          />
+         <div className="w-12 h-12 rounded-xl bg-slate-700 flex items-center justify-center text-white font-semibold text-lg border border-white/10">
+         {dummyEmployeeData[0]?.firstName?.charAt(0).toUpperCase()}
+        </div>
 
           <div>
             <h2 className="font-medium text-white">{username}</h2>
             <p className="text-xs text-slate-400">
-              {dummyEmployeeData.position}
+              {dummyEmployeeData[0].role=='Admin'? 'Adminstartor':'Employee'}
             </p>
           </div>
         </div>
       </div>
 
-      {/* Navigation */}
       {/* Navigation */}
 <nav className="flex-1 p-4 overflow-y-auto">
   <h2 className="mb-3 px-3 text-[11px] font-semibold tracking-wider text-slate-500 uppercase">
