@@ -34,10 +34,10 @@ const Dashboard = () => {
   }
 
   if (data.role === "ADMIN") {
-    return <div><AdminDashboard/></div>;
+    return <div><AdminDashboard data={data}/></div>;
   }
 
-  return <div><EmployeeDashboard/></div>;
+  return <div><EmployeeDashboard data={data}/></div>;
 };
 
 export default Dashboard;

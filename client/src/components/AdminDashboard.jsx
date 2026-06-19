@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 
 const AdminDashboard = ({ data }) => {
+    console.log(data);
   const stats = [
     {
       icon: UsersIcon,
@@ -28,7 +29,7 @@ const AdminDashboard = ({ data }) => {
     },
     {
       icon: FileTextIcon,
-      value: data?.pendingLeaves || 0,
+      value: data?.pendingLeaves|| 0,
       label: "Pending Leaves",
       description: "Awaiting approval",
     },
