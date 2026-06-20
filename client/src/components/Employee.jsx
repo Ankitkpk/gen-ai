@@ -8,7 +8,7 @@ import {
   Building2,
   Users,
 } from "lucide-react";
-import { dummyEmployeeData } from "../assets/assets";
+import { dummyEmployeeData,DEPARTMENTS} from "../assets/assets";
 
 const Employee = () => {
   const [employee, setEmployee] = useState([]);
@@ -20,7 +20,7 @@ const Employee = () => {
     setLoading(true);
 
     setTimeout(() => {
-      setEmployee(dummyEmployeeData);
+      setEmployee(dummyEmployeeData.filter((emp)=>!department || emp.department === department));
       setLoading(false);
     }, 1000);
   }, []);
@@ -31,14 +31,16 @@ const Employee = () => {
 
   const filteredEmployees = employee.filter((emp) => {
     const matchSearch =
-      emp.name?.toLowerCase().includes(search.toLowerCase()) ||
-      emp.email?.toLowerCase().includes(search.toLowerCase());
+      emp.firstName?.toLowerCase().includes(search.toLowerCase()) ||
+      emp.lastName?.toLowerCase().includes(search.toLowerCase());
 
     const matchDepartment =
       department === "" || emp.department === department;
 
     return matchSearch && matchDepartment;
   });
+
+  
 
   return (
     <div className="p-4 md:p-6 space-y-6 animate-fade-in">
@@ -74,15 +76,23 @@ const Employee = () => {
       type="text"
       placeholder="Search employee..."
       className="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-xl"
+      onChange={(e) => setSearch(e.target.value)}
+      value={search}
     />
   </div>
-
-  <select className="flex-1 px-4 py-3 border border-slate-300 rounded-xl">
-    <option>All Departments</option>
-    <option>Engineering</option>
-    <option>HR</option>
-    <option>Finance</option>
-  </select>
+<select
+  className="flex-1 px-4 py-3 border border-slate-300 rounded-xl"
+  onChange={(e) => setDepartment(e.target.value)}
+  value={department}
+>
+ <option value="">All Departments</option>
+    {
+    DEPARTMENTS.map((dep)=>(
+    <option key={dep} value={dep}>{dep}</option>
+    ))
+}
+    
+</select>
 </div>
       </div>
 
