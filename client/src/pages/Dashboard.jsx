@@ -19,7 +19,7 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className=" flex items-center justify-center text-center ">
+      <div className=" flex items-center justify-center text-center">
         <Loading/>
       </div>
     );

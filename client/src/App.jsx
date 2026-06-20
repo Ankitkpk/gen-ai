@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard';
 import Attendance from './pages/Attendance';
 import PrintPayslipe from './pages/PrintPayslipe';
 import LoginForm from './components/LoginForm';
+import Employee from './components/Employee';
 const App = () => {
   return (
     <>
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="attendance" element={<Attendance />} />
           <Route path="payslipe" element={<Payslips />} />
           <Route path="setting" element={<Settings />} />
+          <Route path="employees" element={<Employee/>} />
           <Route path="leave" element={<Leave />} />
         </Route>
 
