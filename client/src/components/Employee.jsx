@@ -6,21 +6,23 @@ import {
   Mail,
   Phone,
   Building2,
-  Users,
 } from "lucide-react";
-import { dummyEmployeeData,DEPARTMENTS} from "../assets/assets";
+import { dummyEmployeeData, DEPARTMENTS } from "../assets/assets";
+import EmployeeCard from "./EmployeeCard";
 
 const Employee = () => {
   const [employee, setEmployee] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [department, setDepartment] = useState("");
+  const [editEmployee,setEditEmployee]=useState(null);
+  const [showCreatemodal,setShowCreatemodal]=useState(false);
 
   const fetchEmployees = useCallback(async () => {
     setLoading(true);
 
     setTimeout(() => {
-      setEmployee(dummyEmployeeData.filter((emp)=>!department || emp.department === department));
+      setEmployee(dummyEmployeeData);
       setLoading(false);
     }, 1000);
   }, []);
@@ -39,8 +41,6 @@ const Employee = () => {
 
     return matchSearch && matchDepartment;
   });
-
-  
 
   return (
     <div className="p-4 md:p-6 space-y-6 animate-fade-in">
@@ -65,119 +65,55 @@ const Employee = () => {
       </div>
 
       {/* Search & Filter */}
-      <div>
-        <div className="flex flex-col md:flex-row gap-4">
-  <div className="relative flex-[4]">
-    <Search
-      size={18}
-      className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
-    />
-    <input
-      type="text"
-      placeholder="Search employee..."
-      className="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-xl"
-      onChange={(e) => setSearch(e.target.value)}
-      value={search}
-    />
-  </div>
-<select
-  className="flex-1 px-4 py-3 border border-slate-300 rounded-xl"
-  onChange={(e) => setDepartment(e.target.value)}
-  value={department}
->
- <option value="">All Departments</option>
-    {
-    DEPARTMENTS.map((dep)=>(
-    <option key={dep} value={dep}>{dep}</option>
-    ))
-}
-    
-</select>
-</div>
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="relative flex-[4]">
+          <Search
+            size={18}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+          />
+
+          <input
+            type="text"
+            placeholder="Search employee..."
+            className="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+
+        <select
+          className="flex-1 px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          value={department}
+          onChange={(e) => setDepartment(e.target.value)}
+        >
+          <option value="">All Departments</option>
+
+          {DEPARTMENTS.map((dep) => (
+            <option key={dep} value={dep}>
+              {dep}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Employee Cards */}
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-          {[...Array(6)].map((_, index) => (
-            <div
-              key={index}
-              className="bg-white p-6 rounded-2xl border border-slate-200 animate-pulse"
-            >
-              <div className="h-14 w-14 rounded-full bg-slate-200 mb-4"></div>
-
-              <div className="h-4 bg-slate-200 rounded w-2/3 mb-3"></div>
-              <div className="h-3 bg-slate-200 rounded w-full mb-2"></div>
-              <div className="h-3 bg-slate-200 rounded w-3/4"></div>
-            </div>
-          ))}
-        </div>
-      ) : filteredEmployees.length === 0 ? (
-        <div className="bg-white rounded-2xl p-10 border border-slate-200 text-center">
-          <h3 className="text-lg font-semibold text-slate-700">
-            No Employees Found
-          </h3>
-          <p className="text-slate-500 mt-2">
-            Try changing your search or filter.
-          </p>
+        <div className="flex justify-center p-12">
+          <div className="animate-spin size-8 border-2 border-indigo-600 border-t-transparent rounded-full" />
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-          {filteredEmployees.map((emp) => (
-            <div
-              key={emp._id}
-              className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-            >
-              {/* Avatar */}
-              <div className="flex items-center gap-4">
-                <img
-                  src={
-                    emp.image ||
-                    "https://ui-avatars.com/api/?name=Employee"
-                  }
-                  alt={emp.name}
-                  className="w-14 h-14 rounded-full object-cover border"
-                />
-
-                <div>
-                  <h3 className="font-semibold text-slate-800 text-lg">
-                    {emp.name}
-                  </h3>
-
-                  <p className="text-sm text-slate-500">
-                    {emp.position || "Employee"}
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-5 space-y-3">
-                <div className="flex items-center gap-3 text-slate-600">
-                  <Mail size={16} />
-                  <span className="text-sm">{emp.email}</span>
-                </div>
-
-                <div className="flex items-center gap-3 text-slate-600">
-                  <Phone size={16} />
-                  <span className="text-sm">{emp.phone}</span>
-                </div>
-
-                <div className="flex items-center gap-3 text-slate-600">
-                  <Building2 size={16} />
-                  <span className="text-sm">{emp.department}</span>
-                </div>
-              </div>
-
-              <div className="mt-5 pt-4 border-t border-slate-200 flex justify-between">
-                <button className="text-indigo-600 font-medium hover:text-indigo-700">
-                  View
-                </button>
-
-                <button className="text-emerald-600 font-medium hover:text-emerald-700">
-                  Edit
-                </button>
-              </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredEmployees.length === 0 ? (
+            <div className="col-span-full text-center bg-white rounded-2xl  border border-dashed border-slate-300 p-12">
+              <p className="text-slate-500 text-lg">
+                No employee found
+              </p>
             </div>
-          ))}
+          ) : (
+            filteredEmployees.map((emp) => (
+              <EmployeeCard key={emp.id}  employee={emp} onDelete={fetchEmployees} onEdit={(e)=>setEditEmployee(e)}/>
+            ))
+          )}
         </div>
       )}
     </div>
