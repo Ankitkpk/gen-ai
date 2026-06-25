@@ -8,6 +8,7 @@ import {
   UmbrellaIcon,
 } from "lucide-react";
 import LeaveHistory from "../components/Leave/LeaveHistory";
+import ApplyLeaveModal from "../components/Leave/ApplyLeavemodal";
 
 const Leave = () => {
   const [leaves, setLeaves] = useState([]);
@@ -124,26 +125,11 @@ const Leave = () => {
       )}
        <LeaveHistory leaves={leaves} />
       {/* Modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-lg">
-            <h3 className="text-lg font-semibold mb-4">
-              Apply for Leave
-            </h3>
-
-            <p className="text-slate-500 mb-4">
-              Leave application form goes here.
-            </p>
-
-            <button
-              onClick={() => setShowModal(false)}
-              className="px-4 py-2 bg-slate-200 hover:bg-slate-300 rounded-lg"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+      <ApplyLeaveModal
+   open={showModal}
+  onClose={() => setShowModal(false)}
+  onSuccess={fetchLeaves}
+/>
     </div>
   );
 };
