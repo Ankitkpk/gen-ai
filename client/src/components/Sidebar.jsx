@@ -16,6 +16,7 @@ import {
   CalendarDays,
   Wallet,
   Settings,
+  CalendarCheck
 } from "lucide-react";
 
 const Sidebar = () => {
@@ -52,6 +53,11 @@ const Sidebar = () => {
       icon: CalendarDays,
       path: "/attendance",
     },
+    {
+  name: "Leave",
+  icon: CalendarCheck,
+  path: "/leave",
+},
     {
       name: "Payroll",
       icon: Wallet,

@@ -1,4 +1,5 @@
 import React from "react";
+import { format } from "date-fns";
 
 const AttendanceHistory = ({ history = [] }) => {
   return (
@@ -9,6 +10,7 @@ const AttendanceHistory = ({ history = [] }) => {
           Recent Activity
         </h2>
       </div>
+
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
@@ -42,19 +44,25 @@ const AttendanceHistory = ({ history = [] }) => {
                   className="border-b border-slate-100 hover:bg-slate-50 transition"
                 >
                   <td className="px-6 py-4 text-slate-700">
-                    {record.date}
+                    {format(new Date(record.date), "MMM dd, yyyy")}
                   </td>
 
                   <td className="px-6 py-4 text-slate-700">
-                    {record.checkIn || "--"}
+                    {record.checkIn
+                      ? format(new Date(record.checkIn), "hh:mm a")
+                      : "--"}
                   </td>
 
                   <td className="px-6 py-4 text-slate-700">
-                    {record.checkOut || "--"}
+                    {record.checkOut
+                      ? format(new Date(record.checkOut), "hh:mm a")
+                      : "--"}
                   </td>
 
                   <td className="px-6 py-4 text-slate-700">
-                    {record.workingHours || "--"}
+                   {record.workingHours
+  ? format(new Date(record.workingHours), "hh:mm")
+  : "--"}
                   </td>
 
                   <td className="px-6 py-4">
@@ -80,11 +88,8 @@ const AttendanceHistory = ({ history = [] }) => {
               ))
             ) : (
               <tr>
-                <td
-                  colSpan="6"
-                  className="py-8 text-center text-slate-500"
-                >
-                  No  records found.
+                <td colSpan={6} className="py-8 text-center text-slate-500">
+                  No records found.
                 </td>
               </tr>
             )}
