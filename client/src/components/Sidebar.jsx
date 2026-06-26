@@ -61,7 +61,7 @@ const Sidebar = () => {
     {
       name: "Payroll",
       icon: Wallet,
-      path: "/payroll",
+      path: "/payslipe",
     },
     {
       name: "Settings",

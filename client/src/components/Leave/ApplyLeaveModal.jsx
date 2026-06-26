@@ -5,6 +5,7 @@ import {
   FileText,
   X,
   Send,
+  Loader2Icon,
 } from "lucide-react";
 
 const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
@@ -172,7 +173,7 @@ const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
               className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-indigo-600 py-2.5 text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
               <Send size={18} />
-              {loading ? "Submitting..." : "Submit"}
+              {loading ? <Loader2Icon className="w-4 h-4" /> : "Submit"}
             </button>
           </div>
         </form>
