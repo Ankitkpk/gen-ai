@@ -3,6 +3,7 @@ import { dummyEmployeeData, dummyPayslipData } from "../assets/assets";
 import { Plus } from "lucide-react";
 import Loading from "../components/Loading";
 import PayslipTable from "../components/payslips/PlayslipTable";
+import GeneratePayslipe from "../components/payslips/GeneratePayslipe";
 
 const Payslips = () => {
   const [payslip, setPayslip] = useState([]);
@@ -50,13 +51,7 @@ const Payslips = () => {
                 : "View your Payslip History"}
             </p>
           </div>
-
-          {isAdmin && (
-            <button className="px-6 py-3 flex items-center gap-1 rounded-lg bg-indigo-700 text-white font-medium shadow transition duration-300">
-              <Plus size={20} />
-             <span>Generate Payslip</span>
-            </button>
-          )}
+        {isAdmin && <GeneratePayslipe employees={employees} onSuccess={fetchPayslip}/>}
         </div>
         <PayslipTable payslip={payslip} isAdmin={isAdmin}/>
       </div>
