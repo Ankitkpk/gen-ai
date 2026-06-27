@@ -31,6 +31,7 @@ const App = () => {
           <Route path="setting" element={<Settings />} />
           <Route path="employees" element={<Employee/>} />
           <Route path="leave" element={<Leave />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
 
         <Route path="/print/payslipe/:id" element={<PrintPayslipe />} />

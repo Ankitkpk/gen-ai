@@ -210,7 +210,6 @@ const GeneratePayslipe = ({ employees , onSuccess }) => {
               <input
                 type="number"
                 name="deductions"
-                value={formData.deductions}
                 onChange={handleChange}
                 placeholder="0"
                 className="w-full border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500"
@@ -239,7 +238,7 @@ const GeneratePayslipe = ({ employees , onSuccess }) => {
                   Generating...
                 </>
               ) : (
-                "Generate Payslip"
+                "Generate"
               )}
             </button>
           </div>
