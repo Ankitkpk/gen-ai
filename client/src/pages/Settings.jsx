@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { dummyProfileData } from '../assets/assets';
 import { LockIcon} from "lucide-react";
 import Loading from '../components/Loading';
+import ProfileForm from '../components/ProfileForm';
 const Settings = () => {
   const [profile,setProfile]=useState([]);
   const [loading ,setLoading]=useState(true);
@@ -26,14 +27,14 @@ const Settings = () => {
        <h1>Settings</h1>
         <p>Manage your account and preferences</p>
       </div>
-       {profile && <p>profile form</p>}
+       {profile && <ProfileForm initialData={profile} onSuccess={fetchProfile}/>}
        {/* password change */}
 
       <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-indigo-200">
   <div className="flex items-center justify-between">
     {/* Left Section */}
     <div className="flex items-center gap-5">
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-100">
+      <div className="flex h-10 w-12 items-center justify-center rounded-2xl bg-indigo-100">
         <LockIcon className="h-7 w-7 text-indigo-600" />
       </div>
 
