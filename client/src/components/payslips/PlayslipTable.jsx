@@ -66,7 +66,7 @@ const PayslipTable = ({ payslip, isAdmin }) => {
                     <button
                       className="inline-flex items-center justify-center gap-2  text-xs p-3 rounded-lg text-blue-600 bg-slate-100 transition"
                       title="Download Payslip"
-                      onClick={()=>window.open(`/print/payslipe/${payslip._id || payslip.id}`)}
+                      onClick={()=>window.open(`/print/payslipe/${item._id}`)}
                     >
                       <Download size={15} />
                        Download

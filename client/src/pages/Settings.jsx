@@ -23,7 +23,7 @@ const Settings = () => {
     fetchProfile();
   }, []);
 
-  if (loading) return <Loading />;
+  if (loading) return <Loading className='flex items-center justify-center  min-h-screen w-full'/>;
 
   return (
     <>
