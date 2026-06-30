@@ -6,19 +6,19 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "Email is required"],
       unique: true,
-      trim: true,
       lowercase: true,
-    },
-    username: {
-      type: String,
-      required: [true, "Username is required"],
-      trim: true,
     },
     password: {
       type: String,
       required: [true, "Password is required"],
       minlength: [6, "Password must be at least 6 characters long"],
     },
+    role:{
+      type:String,
+      required:[true,"role is required"],
+      enum:["ADMIN" , "EMPLOYEE"], 
+      default:"EMPLOYEE"
+    } 
   },
   {
     timestamps: true,
