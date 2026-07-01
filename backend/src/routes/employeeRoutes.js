@@ -7,22 +7,22 @@ import {
   updateEmployee,
   deleteEmployee,
 } from "../controllers/employee.controller.js";
-
+import { protect, protectAdmin } from "../middleware/auth.js";
 const router = express.Router();
 
 // Create Employee
 router.post("/", createEmployee);
 
 // Get All Employees
-router.get("/", getAllEmployees);
+router.get("/", protect ,protectAdmin, getAllEmployees);
 
 // Get Single Employee
-router.get("/:id", getEmployeeById);
+router.get("/:id",protect,protectAdmin,getEmployeeById);
 
 // Update Employee
-router.put("/:id", updateEmployee);
+router.put("/:id",protect,protectAdmin, updateEmployee);
 
 // Soft Delete Employee
-router.delete("/:id", deleteEmployee);
+router.delete("/:id",protect,protectAdmin, deleteEmployee);
 
 export default router;
